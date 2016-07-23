@@ -1,49 +1,53 @@
-<!DOCTYPE html>
-<!--
-Copyright 2014 Google Inc. All Rights Reserved.
+---
+feature_name: Service Worker postMessage()
+chrome_version: 45
+feature_id: 5163630974730240
+---
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+<h3>Background</h3>
+<p>
+  This sample demonstrates basic Service Worker registration, in conjunction with using the
+  <a href="https://html.spec.whatwg.org/multipage/workers.html#dom-worker-postmessage"><code>postMessage</code></a>
+  interface to communicate with the service worker controlling the page.
+</p>
 
-    http://www.apache.org/licenses/LICENSE-2.0
+<p>
+  The service worker's
+  <a href="https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-global-scope-onmessage-attribute"><code>onmessage</code> handler</a>
+  behaves differently depending on the type of message it receives; there's an arbitrary set of
+  "commands" that this controlled page can send it to do things like determine whether the resource
+  at a given URL is present in the cache, add resources to the cache, or remove them.
+</p>
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
-<script>
-var scope = 'hello/';
-var registration;
+<p>
+  Starting in Chrome 45, it's also possible for a service worker to initiate a message to one or
+  more of the clients (i.e. this page) that it controls. For the purposes of this example, as soon
+  as this service worker finishes its <code>activate</code> handler, it sends a message to all of
+  its clients letting it know that it's ready. This is roughly equivalent to listening for service
+  work lifecycle events on the underlying registration.
+</p>
 
-function register() {
-  navigator.serviceWorker.register('service-worker.js', {scope: scope})
-    .then(function(r) {
-      console.log('registered: ');
-      registration = r;
-      console.log(registration);
-    })
-    .catch(function(whut) {
-      console.error('uh oh... ');
-      console.error(whut);
-    });
-}
+<p>
+  (Note that the Cache Storage API is also exposed via <code>window.caches</code>,
+  so in a real-world web application, you could just manage cache entries
+  directly from your web page, without having to coordinate caches by passing
+  messages to the service worker.)
+</p>
 
-function unregister() {
-  registration.unregister()
-    .then(function() {
-      console.log('unregistered');
-    });
-}
-</script>
-<button onclick="register()">Register</button>
-<button onclick="unregister()">Unregister</button>
+{% capture initial_output_content %}
+<div id="commands" style="display: none">
+  <div>
+    <label for="url">Resource URL:</label>
+    <input id="url" type="text" size="50" value="https://www.google.com/">
+    <button id="add">Add to Cache</button>
+    <button id="delete">Delete from Cache</button>
+  </div>
+  <div>
+    <button id="listcontents">List Current Cache Contents</button>
+  </div>
+  <ul id="contents"></ul>
+</div>
+{% endcapture %}
+{% include output_helper.html initial_output_content=initial_output_content %}
 
-<p>Some nice places to visit:
-
-<ul>
-<li><a href="hello/world">world</a>
-<li><a href="hello/Cleveland">Cleveland</a>
-</ul>
+{% include js_snippet.html filename='demo.js' %}
