@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <html>
     <head>
-      <title>Home</title>
+      <title>{{ page.title }}</title>
       <!-- link to main stylesheet -->
       <link rel="stylesheet" type="text/css" href="/css/main.css">
     </head>
@@ -16,34 +16,7 @@
       </nav>
       <div class="container">
       
-      <div class="home">
-
-  <h1 class="page-heading">Posts</h1>
-
-  <ul class="post-list">
-    
-      <li>
-        <span class="post-meta">Sep 30, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/jekyll/update/2016/09/30/welcome-to-jekyll.html">Welcome to Jekyll!</a>
-        </h2>
-      </li>
-    
-      <li>
-        <span class="post-meta">Sep 30, 2016</span>
-
-        <h2>
-          <a class="post-link" href="/activerecord/modules/scopes/2016/09/30/arscopes-sti-included-modules.html">Active record scopes, STI and included modules</a>
-        </h2>
-      </li>
-    
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
-
-</div>
-
+      {{ content }}
       
       </div><!-- /.container -->
       <footer>
