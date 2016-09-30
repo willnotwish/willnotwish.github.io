@@ -5,11 +5,12 @@ date:   2016-09-30 11:48:00 +0100
 categories: activerecord modules scopes
 ---
 
-Sometimes, Active Record's STI is very useful, but sometimes it confuses the issue. I found that it can complicate my carefully crafted class methods (aka *scopes*). When I began to include modules in my models to help organise functionality, STI got in the way a bit. Here's what I found out.
+When I started to include modules in my models recently to help me get organised, I found that AR's STI complicated my carefully crafted class methods (aka *scopes*).
 
-### The problem domain
+### The problem
 
-For my running club's website, I needed an **Event** base class to represent "something" that takes (or took) place at a given time on a given date. I used AR's STI mechanism to define all sorts of events such as Social Event, a Christmas Party, a Training Run and a Race. These all inherit from the base class Event.
+For my running club's website, I needed an **Event** base class to represent "something" that takes (or took) place at a given time on a given date. I used STI to define a few events such as Social Event, a Christmas Party, a Training Run and a Race, all of which inherit from the base class Event.
+I intend to create more of these derived classes over  time.
 
 <!-- The events table has a type column, as required by STI. -->
 
