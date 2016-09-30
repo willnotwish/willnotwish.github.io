@@ -19,7 +19,7 @@ description: > # this means to ignore newlines until "baseurl:"
   I'm an electrical-turned-software engineer. I've been writing Ruby for ten years now: that's a lot of code. I find it hard to remember it all, so I'm documenting some of my technical findings here. If this stuff helps you as well, great.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://nickadams.co.uk" # the base hostname & protocol for your site
-twitter_username: willnotwish
+twitter_username: will_not_wish
 github_username:  willnotwish
 
 # Build settings
