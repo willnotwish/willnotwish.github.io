@@ -52,11 +52,11 @@ Applying an AWS policy to enforce read-only access to the legacy bucket removes 
 while at the same time allowing the new system to make copies of legacy photos on demand.
 
 ### An AWS S3 policy to enforce copy-only access
-Suppose we have two users: `Alice` and `Bob`, and two buckets: `B1` and `B2`.
+Suppose we have two users: `Alice` and `Bob`, and two buckets: `b1` and `b2`.
 
-Alice requires full access to `B1` and no access at all to `B2`, while Bob requires “copy access” to `B1` and full access to `B2`.
+Alice requires full access to `b1` and no access at all to `b2`, while Bob requires “copy access” to `b1` and full access to `b2`.
 
-By “copy access”, we mean the ability to copy files from `B1` to `B2`. The [Fog aws gem](https://github.com/fog/fog-aws) uses this [AWS API](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)
+By “copy access”, we mean the ability to copy files from `b1` to `b2`. The [Fog aws gem](https://github.com/fog/fog-aws) uses this [AWS API](http://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)
 
 > This implementation of the PUT operation creates a copy of an object that is already stored in Amazon S3. A PUT copy operation is the same as performing a GET and then a PUT. Adding the request header, x-amz-copy-source, makes the PUT operation copy the source object into the destination bucket.
 >  
