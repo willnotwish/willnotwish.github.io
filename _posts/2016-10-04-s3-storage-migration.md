@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "S3 storage and Rails applications"
+title:  "AWS S3 policies and Rails applications"
 date:   2016-10-04 14:47:00 +0100
 categories: s3 aws rails
 ---
