@@ -16,7 +16,7 @@
 title: Nick Adams's tech blog
 email: nick@nickadams.co.uk
 description: > # this means to ignore newlines until "baseurl:"
-  I'm an electrical-turned-software engineer. I've been writing Ruby for ten years now: that's a lot of code. I find it hard to remember it all, so I'm documenting some of my technical findings here. If this stuff helps you as well, great.
+  I'm an electrical-turned-software engineer. I've been writing Ruby for ten years now: that's a lot of code. It's hard to remember it all, so I'm documenting some of my technical findings here. If this stuff helps you, excellent.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://willnotwish.github.io/" # the base hostname & protocol for your site
 twitter_username: will_not_wish
