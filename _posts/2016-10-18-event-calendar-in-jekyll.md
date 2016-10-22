@@ -28,7 +28,7 @@ This URL works fine ```/admin/events```
 
 Unfortunately I get an ```ActionController::UnknownFormat``` error when I try ```/admin/events.json```
 
-Looks like I spoke too soon. Let's look at the controller.
+Looks like I spoke too soon. Let's look at the controller...
 
 Hmm. It looks a bit old school — probably the oldest bit of code in the whole app.
 
@@ -37,10 +37,10 @@ I added ```respond_to :html, :json``` to the top of the controller, and now the 
 I got it working. Here's an excerpt from the downloaded file:
 
 ```
-{[ 
+[ 
     {"name":"Monday night winter","date":"12-Dec-2016","time":"19:30","url":"http://localhost:3000/events/107"},
     {"name":"Tempo","date":"13-Dec-2016","time":"18:45","url":"http://localhost:3000/events/135"}
-]}
+]
 ```
 It's not exactly [JSON API](http://jsonapi.org/) but it's a start.
 
