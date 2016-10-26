@@ -87,7 +87,7 @@ Thinking about it some more, I still need a `User` Active Record model stored lo
 
 How does that work? I need to read Auth0's documentation again [goes away...]
 
-### The Auth0 callback (*part 1*)
+### The Auth0 callback — part 1
 
 In the `callback` action of my `Auth0Controller` the sample code from Auth0 shows the auth data (actually an `OmniAuth::AuthHash` instance) being stored in the session:
 
