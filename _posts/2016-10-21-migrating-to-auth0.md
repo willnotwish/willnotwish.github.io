@@ -242,6 +242,10 @@ So... I would expect `authenticate` to be called when checking (passively) if a 
 
 But I'm still seeing my strategy being called over and over, with redirect after redirect.
 
+Some time later...
+
+Turns out that a Devise "hook" was logging me out by "throwing a warden" because the account wasn't confirmed. This is fair enough, but now I'm getting the nagging feeling that trying to integrate Devise and Auth0 is a dumb idea. Devise does what it does really well, but I don't need the bulk of its functionality. What do I need? See my next post.
+
 
 
 
