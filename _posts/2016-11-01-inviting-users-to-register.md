@@ -21,7 +21,7 @@ What I want now is for a freshly signed-up user to enter their invitation code b
 
 I have a `User` model, and a `Profile` model. I need the invitation code. What options do I have?
 
-I think I need an `Invitation` model. It should have a unique `code`. This is the code I give to the user to enter when (correctly, immediately after) they register. It also needs a flag to say whether it's been used or not. (I could use a timestamp for that.) An invitation code cannot be used twice. I think it should have a `belongs_to` relationship with a `User`. When the user is set (*i.e.*, a foreign key exists) the invitation is said to be `accepted`.
+I need an `Invitation` model. It should have a unique `code`. This is what I give to the user to enter immediately after they register. the `Invitation` also needs a flag to say whether it's been used or not. (I could use a timestamp for that.) An invitation code cannot be used twice. I think an `Invitation` should `belongs_to` a `User`. When the user is set (*i.e.*, a foreign key exists) the invitation is said to be `accepted`.
 
 To keep things RESTful, I'll write an `InvitationAcceptance` model (not database backed, just ActiveModel compliant: it quacks like ActiveRecord) which encapsulates the `User` and the invitation code. I'll have a corresponding `InvitationAcceptanceController` which "saves" the `InvitationAcceptance` model by marking the invitation as accepted.
 
