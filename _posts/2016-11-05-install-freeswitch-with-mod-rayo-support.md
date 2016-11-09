@@ -4,7 +4,6 @@ title:  "Install freeswitch with mod_rayo support on Ubuntu"
 date:   2016-11-05 11:11:00 +0000
 categories: freeswitch rayo install linux
 ---
-
 Here's what I did on a fresh Ubuntu 16.04 desktop installation. I referred to the [Freeswitch wiki](https://freeswitch.org/confluence/display/FREESWITCH/FreeSWITCH+Explained)
 
 1. In my `~/dev` directory, `git clone...`
@@ -29,13 +28,13 @@ Here's what I did on a fresh Ubuntu 16.04 desktop installation. I referred to th
 19. Repeated step 7 `./configure`
 20. Some time later (about 5 mins): success
 21. `make`
-22. Got message: "Nether yasm nor yasm have been found. See the README..."
+22. Got message: "Nether yasm nor nasm have been found. See the README..."
 23. The README appears to be empty. I Googled a bit and did
 24. `sudo apt-get install nasm` and `sudo apt-get install yasm`
 25. Repeated step 21 `make`
 26. Got much further and started compiling codecs (or something)...
 27. `make` failing with error messages to install a few more packages. Something to note is that if  the build fails at this stage, and you need to do `sudo apt-get install <xxx>`, then you need to re run `./configure` and build again. I ended up commenting out `mod_lua` from `modules.conf`. At some point I may go back and re-add it. Eventually, `make` succeeded.
-28. `sudo make install`
+28. `sudo make install` to copy executables into `/usr/local/freeswitch`
 29. `cd /usr/local/freeswith/bin`
 29. Started Freeswitch in the foreground with `./freeswitch -c`
 
