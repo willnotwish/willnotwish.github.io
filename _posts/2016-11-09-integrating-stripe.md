@@ -58,9 +58,56 @@ Looking at the Stripe gem's [source code][3], I see that the [Stripe Customer cl
 
 Let's try adding `has_one :customer` to my `User` class. Or maybe that's too complex. Is there any way I could store the Stripe `customer` reference in my `User`?
 
-Looks like a string `id` is generated when the `Stripe::Customer` object is created. This id can be used to retrieve said `Customer`, so let's add it to the User modle directly for now. Maybe some more indirection would be required in a production app, but this is just to get something going.
+Looks like a string `id` is generated when the `Stripe::Customer` object is created. This id can be used to retrieve said `Customer`, so let's add it to the User model directly for now. Maybe some more indirection would be required in a production app, but this is just to get something going.
 
-`Nicks-iMac:raw nick$ bin/rails g migration add_stripe_customer_id_to_users stripe_customer_id:string:index`
+```shell
+bin/rails g migration add_stripe_customer_id_to_users stripe_customer_id:string:index
+```
+
+and in the `User` model:
+
+```ruby
+  validates :stripe_customer_id, uniqueness: true, allow_nil: true
+  
+  def stripe_customer
+    if stripe_customer_id.present?
+      @customer ||= Stripe::Customer.retrieve( stripe_customer_id )
+    else
+      nil
+    end
+  end
+```
+
+To keep things RESTful, I'll wrap the `Stripe::Charge` creation operation in my own `stripe_charge` resource (a `StripeCharge` class: Active Model compliant, but not database-backed), and write a RESTful controller to go with it: `StripeChargesController`. The latter's `create` method charges the card:
+
+```ruby
+  def create
+    @charge.save
+    respond_with @charge, notice: 'Charge successfully created'
+  end
+```
+
+with `@charge` assigned in a `before_action` callback:
+
+```ruby
+def build_charge
+    @charge = StripeCharge.new stripe_charge_params
+end
+
+def stripe_charge_params
+    params.fetch( :stripe_charge, { email: current_user.email, currency: 'gbp', amount: 500, description: 'Summat or other' } )
+          .permit( :email, :token_id, :amount, :description, :currency )
+          .merge( user: current_user )
+          .tap { |hash| hash[:currency] ||= 'gbp' }
+end
+```
+
+Note how I set default values in the strong parameters munging method `stripe_charge_params`.
+
+Straightaway you can see that it's not so simple! That's the trouble with "quick start" samples. They're too simple for any kind of real-world implementation. I really need to nest the `stripe_charge` resource under some kind of `product` or `basket` resource. After all, you buy a product or a basket of products; you don't randomly create a charge.
+
+In any case, I found that some javascript was needed.
+
 
 
 
