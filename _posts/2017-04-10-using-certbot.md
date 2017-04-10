@@ -1,16 +1,26 @@
-<!-- 2017-04-10-using-certbot.md -->
+---
+layout: post
+title:  "Using letsencrypt/certbot to generate SSL certificates"
+date:   2017-04-10 18:34:00 +0000
+categories: ssl certbot letsencrypt
+---
 
-I used letsencrypt (or is it certobt?) to generate an SSL certificate for The Running Curve's promotional website.
+I used `letsencrypt` (or is it `certbot`?) to generate an SSL certificate for The Running Curve's promotional website.
 
-Those certificates only last for three months, and then they need renewing. It's not that difficult, but in all the rush to get theat site ready I didn't make any notes and then I forgot how to renew it.
+Those certificates only last for three months, and then they need renewing. It's not that difficult, but in all the rush to get theat site ready I didn't make any notes and then I forgot how renew works.
 
-The concept is simple enough: tell the issuing authority which domain you want to renew, put a file in a "well known" place on the server to prove ownership (which only I can do as I'm the one who administers the domain in question), and tell letsencrypt's CA servers to verify that it's there. letsencrypt then issues the certificate and puts it on my server in the correct place (somewhere where nginx can find it).
+The concept is simple enough.
+1. tell the issuing authority which domain you want to renew
+2. put a file in a "well known" place on the server to prove ownership (which only I can do as I'm the one who administers the domain in question)
+3. tell letsencrypt's CA servers to verify that it's there. 
+
+letsencrypt then issues the certificate and puts it on my server in the correct place (somewhere where nginx can find it).
 
 The documentation and hearsay about this is very confusing.
 
 For a start, the letsencrypt client is called "certbot".
 
-The main reference is here https://certbot.eff.org/#ubuntuother-nginx
+The main reference is here [https://certbot.eff.org/#ubuntuother-nginx]
 
 Very briefly:
 1. As a user with sudo privileges ('nick')
