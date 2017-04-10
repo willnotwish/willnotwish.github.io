@@ -14,25 +14,25 @@ The concept is simple enough.
 2. put a file in a "well known" place on the server to prove ownership (which only I can do as I'm the one who administers the domain in question)
 3. tell letsencrypt's CA servers to verify that it's there. 
 
-letsencrypt then issues the certificate and puts it on my server in the correct place (somewhere where nginx can find it).
+`letsencrypt` then issues the certificate and puts it on my server in the correct place (somewhere where nginx can find it).
 
 The documentation and hearsay about this is very confusing.
 
-For a start, the letsencrypt client is called "certbot".
+For a start, the *letsencrypt* client is called *certbot*.
 
 The main reference is here [https://certbot.eff.org/#ubuntuother-nginx]
 
 Very briefly:
 1. As a user with sudo privileges ('nick')
-2. install the certbot-auto script
-3. Make it executable: chmod a+x certbot-auto
-4. Run it: ./certbot-auto certonly
+2. install the `certbot-auto script`
+3. Make it executable: `chmod a+x certbot-auto`
+4. Run it: `./certbot-auto certonly`
 5. Follow the instructions using the "webroot" method
 6. Enter the domain name you want to renew
-7. Enter the webroot: /var/www/letsencrypt
+7. Enter the webroot: `/var/www/letsencrypt`
 
 Then, certbot will generate a file (x) and put it in that webroot. The CA's server will try to retrieve the URL 
-http://therunnningcurve.com/.well-known/acme-challenge/x
+[http://therunnningcurve.com/.well-known/acme-challenge/x]
 
 You have to make sure nginx can serve files from that location. In my nginx.conf file under therunningcurve.com domain section I have this block:
 
