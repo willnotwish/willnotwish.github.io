@@ -3,6 +3,7 @@ layout: post
 title:  "Rendering Rails partials using decorators"
 date:   2016-11-21 10:04:00 +0000
 categories: render partials rails decorators
+published: false
 ---
 
 I sometimes roll my own decorators. You could call them 'view objects'. They augment the model (often, but not always an `ApplicationRecord`, in Rails 5 speak).
